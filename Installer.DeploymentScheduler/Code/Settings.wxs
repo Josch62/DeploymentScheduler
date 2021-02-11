@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?define SourceDir=$(var.SchedulerSettings.TargetDir)?>
+	<Fragment>
+		<!-- TODO: Put your code here. -->
+        <ComponentGroup Id="SettingsComponents" Directory="INSTALLFOLDER">
+
+            <Component Id="SchedulerSettings.dll" Guid="E8097591-5D1B-40CC-A2AD-A51158049FB5" Win64="yes">
+                <File Id="SchedulerSettings.dll" Name="SchedulerSettings.dll" Source="$(var.SourceDir)SchedulerSettings.dll" />
+            </Component>
+            
+        </ComponentGroup>
+	</Fragment>
+</Wix>

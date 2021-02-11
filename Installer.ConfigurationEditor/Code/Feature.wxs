@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+    <Fragment>
+        <?include Config.wxi ?>
+
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ADMINROOT" Name="AdminRoot">
+                <Directory Id="INSTALLFOLDER" Name="Bin" />
+
+                <Directory Id="XMLSTORAGE" Name="XmlStorage">
+                    <Directory Id="EXTENSIONS" Name="Extensions">
+                        <Directory Id="NODES" Name="Nodes">
+                            <Directory Id="XMLFOLDER" Name="406eb547-0228-493e-9fe5-15d58bdcb2dc" />
+                        </Directory>
+                    </Directory>
+                </Directory>
+            </Directory>
+           
+        </Directory>
+        
+        <Feature Id="Main" Title="$(var.ProductName)" Description="Installs $(var.ProductDescription)" Level="1" AllowAdvertise="no"  >
+            <ComponentGroupRef Id="UIComponents" />
+            <ComponentGroupRef Id="XMLComponents" />
+            <ComponentGroupRef Id="RegComponents" />
+        </Feature>
+    </Fragment>
+</Wix>

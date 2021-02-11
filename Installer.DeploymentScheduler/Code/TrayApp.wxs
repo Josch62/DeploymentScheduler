@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?define SourceDir=$(var.OnevinnTrayIcon.TargetDir)?>
+    <Fragment>
+        <ComponentGroup Id="TrayComponents" Directory="INSTALLFOLDER">
+            <Component Id="OnevinnTrayIcon.exe" Guid="EB0C3532-D22D-4E4B-93FA-4847A8913CC6" Win64="yes">
+                <File Id="OnevinnTrayIcon.exe" Name="OnevinnTrayIcon.exe" Source="$(var.SourceDir)OnevinnTrayIcon.exe" />
+            </Component>
+            <Component Id="Hardcodet.Wpf.TaskbarNotification.dll" Guid="7416600C-EF2B-4173-B6EC-814417B872C6" Win64="yes">
+                <File Id="Hardcodet.Wpf.TaskbarNotification.dll" Name="Hardcodet.Wpf.TaskbarNotification.dll" Source="$(var.SourceDir)Hardcodet.Wpf.TaskbarNotification.dll" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?define SourceDir=$(var.IpuProgress.TargetDir)?>
+    <Fragment>
+        <ComponentGroup Id="ProgressComponents" Directory="INSTALLFOLDER">
+            <Component Id="IpuProgress.exe" Guid="933AFC3B-75C1-428D-B7FA-00FA56674F73" Win64="yes">
+                <File Id="IpuProgress.exe" Name="IpuProgress.exe" Source="$(var.SourceDir)IpuProgress.exe" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>

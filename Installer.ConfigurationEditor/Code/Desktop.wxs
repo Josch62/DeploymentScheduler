@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?define UISourceDir=$(var.ConfigurationEditor.TargetDir)?>
+	<Fragment>
+        <!-- TODO: Put your code here. -->
+        <ComponentGroup Id="UIComponents" Directory="INSTALLFOLDER">
+            <Component Id="ConfigurationEditor.dll" Guid="18E16845-3ED5-4EB2-A9D8-A600CE9D0154">
+                <File Id="ConfigurationEditor.dll" Name="ConfigurationEditor.dll" Source="$(var.UISourceDir)ConfigurationEditor.dll" KeyPath="yes" />
+            </Component>
+
+            <Component Id="SchedulerSettings.dll" Guid="2814EA4B-E314-4C6E-A32A-20B8812423BE">
+                <File Id="SchedulerSettings.dll" Name="SchedulerSettings.dll" Source="$(var.UISourceDir)SchedulerSettings.dll" />
+            </Component>
+        </ComponentGroup>
+
+        <ComponentGroup Id="XMLComponents" Directory="XMLFOLDER">
+            <Component Id="ConfigurationEditor.xml" Guid="26EE64FA-8C38-470F-AAC7-72BD6AAAC4FE">
+                <File Id="ConfigurationEditor.xml" Name="ConfigurationEditor.xml" Source="$(var.UISourceDir)ConfigurationEditor.xml" KeyPath="yes" />
+            </Component>
+        </ComponentGroup>
+        
+	</Fragment>
+</Wix>

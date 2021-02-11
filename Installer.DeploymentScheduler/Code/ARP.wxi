@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+    <!-- Icon -->
+    <Icon Id="Product.ico"
+          SourceFile="Resources\product.ico" />
+    <Property Id="ARPPRODUCTICON"
+              Value="Product.ico" />
+    <!-- Location -->
+    <SetProperty Id="ARPINSTALLLOCATION"
+                 Value="[INSTALLDIR]"
+                 After="CostFinalize" />
+    <!-- Comments -->
+    <Property Id="ARPCOMMENTS"
+              Value="$(var.ProductName) $(var.Version)" />
+    <!-- Contact -->
+    <Property Id="ARPCONTACT"
+              Value="$(var.Manufacturer)" />
+    <!-- Remove Database and settings -->
+    <Property Id="REMOVEDB"
+          Value="False" />
+</Include>

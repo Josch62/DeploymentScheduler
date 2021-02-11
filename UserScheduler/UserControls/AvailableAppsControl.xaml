@@ -1,0 +1,91 @@
+<UserControl x:Class="UserScheduler.UserControls.AvailableAppsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ext="clr-namespace:UserScheduler.Extensions"
+             xmlns:enums="clr-namespace:UserScheduler.Enums"
+             xmlns:local="clr-namespace:UserScheduler"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:usercontrols="clr-namespace:UserScheduler.UserControls"
+             xmlns:onecontrols="clr-namespace:OneControls;assembly=OneControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="750" BorderThickness="0,0.1,0,0" BorderBrush="Black" Margin="2,4,2,2" FontSize="11" Background="Transparent" Unloaded="UserControl_Unloaded">
+    <UserControl.Resources>
+        <Style TargetType="ToolTip">
+            <Setter Property="Background" Value="LightYellow" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Margin="2,2,3,0">
+                <Image x:Name="Icon" Height="24" Width="24" Margin="0,2,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Source="../Images/DefApp.ico"/>
+                <TextBlock x:Name="TbAppName" Text="{Binding Path=Name}" ToolTip="{Binding Path=Description}" Margin="10,2,0,0" Height="20" VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold"/>
+            </StackPanel>
+            <TextBlock x:Name="TbEstimatedInstallTime" Text="{Binding Path=EstimatedInstallTime, StringFormat={}Estimated install time: {0} minutes}" Margin="9,5,0,0" Height="18" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <RichTextBox x:Name="rtfBox" Visibility="Collapsed" Grid.Column="1" Grid.Row="2" Margin="2,0,0,0" HorizontalAlignment="Left" IsReadOnly="True" IsDocumentEnabled="True" VerticalAlignment="Stretch" Padding="2" MaxWidth="640" Background="Transparent" BorderThickness="0">
+            <RichTextBox.Resources>
+                <Style TargetType="Hyperlink">
+                    <Setter Property="Cursor" Value="Hand" />
+                    <EventSetter Event="MouseLeftButtonDown" Handler="Hyperlink_MouseLeftButtonDown" />
+                </Style>
+            </RichTextBox.Resources>
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text=""/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <Grid Grid.Column="1" Grid.Row="3" Margin="0,8,0,0" Height="36" Width="250" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <onecontrols:DateTimePicker x:Name="TpPicker" HorizontalAlignment="Left" FontWeight="Normal" Foreground="Black" Height="24" Margin="2,0,0,0" VerticalAlignment="Top" Width="142" DateChanged="TpPicker_DateChanged"/>
+                <Button x:Name="BtSchedule" Content="Save" ToolTip="Save the schedule. The application will be installed at the time picked." Margin="5,0,0,0" VerticalAlignment="Top" Height="24" Width="70" Click="BtSchedule_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="3" Height="40" Width="260" HorizontalAlignment="Left" Margin="235,0,0,0"> 
+            <Image x:Name="StatusGreen" ToolTip="{Binding Path=EvaluationStateText}" Width="16" Margin="5,0,0,0" Source="../Images/statusgreen.png" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Hidden"/>
+            <Image x:Name="StatusRed" ToolTip="{Binding Path=EvaluationStateText}" Height="16" Width="16" Margin="5,0,0,0" Source="../Images/statusred.png" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Hidden"/>
+            <Image x:Name="StatusOrange" ToolTip="{Binding Path=EvaluationStateText}" Height="16" Width="16" Margin="5,0,0,0" Source="../Images/statusorange.jpg" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Hidden"/>
+            <Image x:Name="StatusBlue" ToolTip="{Binding Path=EvaluationStateText}" Height="16" Width="16" Margin="5,0,0,0" Source="../Images/info.ico" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Hidden"/>
+            <TextBlock x:Name="StatusText" Text="This application is currently installed." Margin="30,0,0,0" Width="220" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Visibility="Visible"/>
+            <ProgressBar x:Name="ProgressbarEnforcement" Height="4" Width="170" Margin="32,0,0,4" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsIndeterminate="True" Visibility="Hidden"/>
+        </Grid>
+<!--
+        <GroupBox Grid.Column="1" Grid.Row="3" Margin="0,2,0,5" Header="Actions" Height="55" Width="260" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <GroupItem Margin="2">
+                <Grid>
+                    <Button x:Name="BtInstall" Content="Install" Margin="170,4,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="70" Click="BtInstall_Click"/>
+                    <Button x:Name="BtRepair" Content="Repair" Margin="90,4,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="70" Click="BtRepair_Click"/>
+                    <Button x:Name="BtUninstall" Content="Uninstall" Margin="5,4,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="70" Click="BtUninstall_Click"/>
+                </Grid>
+            </GroupItem>
+        </GroupBox>
+        -->
+        <Grid Grid.Column="1" Grid.Row="3" Margin="0,8,0,5" Height="36" Width="270" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button x:Name="BtUninstall" Content="Uninstall" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="70" Click="BtUninstall_Click"/>
+                <Button x:Name="BtRepair" Content="Repair" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="70" Click="BtRepair_Click"/>
+                <Button x:Name="BtInstall" Content="Install" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="70" Click="BtInstall_Click"/>
+            </StackPanel>
+        </Grid>
+
+
+    </Grid>
+</UserControl>

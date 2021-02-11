@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+    <Fragment>
+        <?include Config.wxi ?>
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFiles64Folder">
+                <Directory Id="CompanyFolder" Name="$(var.Manufacturer)">
+                    <Directory Id="INSTALLFOLDER" Name="$(var.ProductName)" />
+                </Directory>
+            </Directory>
+            <Directory Id="ProgramMenuFolder">
+                <Directory Id="ApplicationProgramsFolder" Name="$(var.Manufacturer)" />
+            </Directory>
+        </Directory>
+
+        <Feature Id="Main" Title="$(var.ProductName)" Description="Installs $(var.ProductDescription)" Level="1" AllowAdvertise="no" ConfigurableDirectory="INSTALLFOLDER">
+            <ComponentGroupRef Id="ServiceGroup" />
+            <ComponentGroupRef Id="TrayComponents" /> 
+            <ComponentGroupRef Id="ProgressComponents" />
+            <ComponentGroupRef Id="UIComponents" />
+            <ComponentGroupRef Id="SettingsComponents" />
+            <ComponentGroupRef Id="CommonComponents" />
+            <ComponentGroupRef Id="RegComponents" />
+        </Feature>
+    </Fragment>
+</Wix>

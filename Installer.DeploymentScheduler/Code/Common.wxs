@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+    <?define CommonSourceDir=$(var.SchedulerCommon.TargetDir)?>
+	<Fragment>
+		<!-- TODO: Put your code here. -->
+        <ComponentGroup Id="CommonComponents" Directory="INSTALLFOLDER">
+
+            <Component Id="SchedulerCommon.dll" Guid="9EAEF6FC-AB93-4408-A01A-7B9BCDA80440" Win64="yes">
+                <File Id="SchedulerCommon.dll" Name="SchedulerCommon.dll" Source="$(var.CommonSourceDir)SchedulerCommon.dll" />
+            </Component>
+
+            <Component Id="Microsoft.Diagnostics.Tracing.EventSource.dll" Guid="209BE96E-6C2D-47C2-8B8C-0A45783C1DCC" Win64="yes">
+                <File Id="Microsoft.Diagnostics.Tracing.EventSource.dll" Name="Microsoft.Diagnostics.Tracing.EventSource.dll" Source="$(var.CommonSourceDir)Microsoft.Diagnostics.Tracing.EventSource.dll" />
+            </Component>
+
+            <Component Id="ServiceEtwManifestDll" Guid="CE1EC7D9-491B-419B-968B-BEEDAC36B4E0" Win64="yes">
+                <File Id="ServiceEtwManifestDll" Name="ServiceEtwManifestDll.dll" Source="$(var.CommonSourceDir)SchedulerCommon.Onevinn-DeploymentScheduler-Service.etwManifest.dll" KeyPath="yes"/>
+            </Component>
+            <Component Id="ServiceEtwManifestMan" Guid="B50BAD9B-DCF5-474A-A6B5-3FBF7DC4A722" Win64="yes">
+                <File Id="ServiceEtwManifestMan" Name="ServiceEtwManifestMan.man" Source="$(var.CommonSourceDir)SchedulerCommon.Onevinn-DeploymentScheduler-Service.etwManifest.man" KeyPath="yes">
+                    <util:EventManifest MessageFile="[INSTALLFOLDER]ServiceEtwManifestDll.dll" ResourceFile="[INSTALLFOLDER]ServiceEtwManifestDll.dll" />
+                </File>
+            </Component>
+
+            <Component Id="DesktopEtwManifestDll" Guid="AFF4A3E7-A30B-4EB8-85CB-41626AD610D6" Win64="yes">
+                <File Id="DesktopEtwManifestDll" Name="DesktopEtwManifestDll.dll" Source="$(var.CommonSourceDir)SchedulerCommon.Onevinn-DeploymentScheduler-Desktop.etwManifest.dll" KeyPath="yes"/>
+            </Component>
+            <Component Id="DesktopEtwManifestMan" Guid="8D5D4D2A-3E00-4704-AE67-30C8CE1F8D9F" Win64="yes">
+                <File Id="DesktopEtwManifestMan" Name="DesktopEtwManifestMan.man" Source="$(var.CommonSourceDir)SchedulerCommon.Onevinn-DeploymentScheduler-Desktop.etwManifest.man" KeyPath="yes">
+                    <util:EventManifest MessageFile="[INSTALLFOLDER]DesktopEtwManifestDll.dll" ResourceFile="[INSTALLFOLDER]DesktopEtwManifestDll.dll" />
+                </File>
+            </Component>
+
+            <Component Id="InstallEtwManifestDll" Guid="60A1113D-7702-4C96-97CF-7688FC92C64F" Win64="yes">
+                <File Id="InstallEtwManifestDll" Name="InstallEtwManifestDll.dll" Source="$(var.CommonSourceDir)SchedulerCommon.Onevinn-DeploymentScheduler-Install.etwManifest.dll" KeyPath="yes"/>
+            </Component>
+            
+            <Component Id="InstalletwManifestMan" Guid="F69112AE-63EE-4BE5-8009-29912B821695" Win64="yes">
+                <File Id="InstalletwManifestMan" Name="InstalletwManifestMan.man" Source="$(var.CommonSourceDir)SchedulerCommon.Onevinn-DeploymentScheduler-Install.etwManifest.man" KeyPath="yes">
+                    <util:EventManifest MessageFile="[INSTALLFOLDER]InstallEtwManifestDll.dll" ResourceFile="[INSTALLFOLDER]InstalletwManifestdll.dll" />
+                </File>
+            </Component>
+
+            <Component Id="WmiEtwManifestDll" Guid="3E647A48-E653-4DEF-BF59-6FA47845353B" Win64="yes">
+                <File Id="WmiEtwManifestDll" Name="WmiEtwManifestDll.dll" Source="$(var.CommonSourceDir)SchedulerCommon.Onevinn-DeploymentScheduler-Wmi.etwManifest.dll" KeyPath="yes"/>
+            </Component>
+            <Component Id="WmiEtwManifestMan" Guid="1F257678-23E5-4CFB-B9E3-4BD0A36283AE" Win64="yes">
+                <File Id="WmiEtwManifestMan" Name="WmiEtwManifestMan.man" Source="$(var.CommonSourceDir)SchedulerCommon.Onevinn-DeploymentScheduler-Wmi.etwManifest.man" KeyPath="yes">
+                    <util:EventManifest MessageFile="[INSTALLFOLDER]WmiEtwManifestDll.dll" ResourceFile="[INSTALLFOLDER]WmiEtwManifestDll.dll" />
+                </File>
+            </Component>
+
+            <Component Id="SqlCEEtwManifestDll" Guid="121D8E44-2E20-4AA0-96FF-53A105DED0EB" Win64="yes">
+                <File Id="SqlCEEtwManifestDll" Name="SqlCEEtwManifestDll.dll" Source="$(var.CommonSourceDir)SchedulerCommon.Onevinn-DeploymentScheduler-SqlCE.etwManifest.dll" KeyPath="yes"/>
+            </Component>
+            <Component Id="SqlCEEtwManifestMan" Guid="22B84013-F108-4835-97DF-0F5EB034940A" Win64="yes">
+                <File Id="SqlCEEtwManifestMan" Name="SqlCEEtwManifestMan.man" Source="$(var.CommonSourceDir)SchedulerCommon.Onevinn-DeploymentScheduler-SqlCE.etwManifest.man" KeyPath="yes">
+                    <util:EventManifest MessageFile="[INSTALLFOLDER]SqlCEEtwManifestDll.dll" ResourceFile="[INSTALLFOLDER]SqlCEEtwManifestDll.dll" />
+                </File>
+            </Component>
+
+            <Component Id="System.Data.SqlServerCe.dll" Guid="68814B13-CAEA-4D01-B2D3-6EB72F5458AD" Win64="yes">
+                <File Id="System.Data.SqlServerCe.dll" Source="$(var.CommonSourceDir)System.Data.SqlServerCe.dll" />
+            </Component>
+
+            <Component Id="sqlceca40.dll" Guid="A3B81020-062B-49FC-9EB8-233D1E323214" Win64="yes">
+                <File Id="sqlceca40.dll" Source="$(var.CommonSourceDir)amd64\sqlceca40.dll" />
+            </Component>
+
+            <Component Id="sqlcecompact40.dll" Guid="9225923B-CC40-4EFF-A812-A32B41915CAF" Win64="yes">
+                <File Id="sqlcecompact40.dll" Source="$(var.CommonSourceDir)amd64\sqlcecompact40.dll" />
+            </Component>
+
+            <Component Id="sqlceer40EN.dll" Guid="279ED206-DBA1-43E4-850E-82C380ACF231" Win64="yes">
+                <File Id="sqlceer40EN.dll" Source="$(var.CommonSourceDir)amd64\sqlceer40EN.dll" />
+            </Component>
+
+            <Component Id="sqlceme40.dll" Guid="BF41DB99-B06B-41E1-BC8B-F403837DF08E" Win64="yes">
+                <File Id="sqlceme40.dll" Source="$(var.CommonSourceDir)amd64\sqlceme40.dll" />
+            </Component>
+
+            <Component Id="sqlceqp40.dll" Guid="3FCFC2B3-87D0-4619-AA7F-8D8278D577D3" Win64="yes">
+                <File Id="sqlceqp40.dll" Source="$(var.CommonSourceDir)amd64\sqlceqp40.dll" />
+            </Component>
+
+            <Component Id="sqlcese40.dll" Guid="F5355BAB-030A-4D3A-9D54-4515ADB6E16B" Win64="yes">
+                <File Id="sqlcese40.dll" Source="$(var.CommonSourceDir)amd64\sqlcese40.dll" />
+            </Component>
+
+            <Component Id="Microsoft.Management.Infrastructure.dll" Guid="54618631-194C-4723-92FA-7183B46C4398" Win64="yes">
+                <File Id="Microsoft.Management.Infrastructure.dll" Name="Microsoft.Management.Infrastructure.dll" Source="$(var.CommonSourceDir)Microsoft.Management.Infrastructure.dll" />
+            </Component>
+        </ComponentGroup>
+	</Fragment>
+</Wix>

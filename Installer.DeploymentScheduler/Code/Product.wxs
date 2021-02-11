@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?include Config.wxi ?>
+    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="$(var.Version)" Manufacturer="$(var.Manufacturer)" UpgradeCode="0b35559d-bd9e-444c-a433-d89793d98090">
+        <Package InstallerVersion="405" Compressed="yes" InstallScope="perMachine" Platform="x64" Manufacturer="$(var.Manufacturer)" />
+        <MediaTemplate EmbedCab="yes" />
+        <Property Id="DISABLEADVTSHORTCUTS" Value="1" />
+        <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
+        <PropertyRef Id='WIXNETFX4RELEASEINSTALLED'/>
+        <Condition Message='This setup requires the .NET Framework 4.7.2 (or greater) to be installed.'>
+            <![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#461808")]]>
+        </Condition>
+        
+        <Property Id="MSIRESTARTMANAGERCONTROL" Value="Disable"/>
+        <Property Id="MsiPath" Hidden="yes"/>
+        
+        <CustomAction Id="SetMsiPath" Return="check" BinaryKey="CaDLL" DllEntry="ExtractRootFolder" />
+        <CustomAction Id="SetVarsCopySettingsFile" Property="CopySettingsFile" Value="RootPath=[MsiPath]"/>
+        <CustomAction Id="CopySettingsFile" Impersonate="no" Execute="deferred" Return="check" BinaryKey="CaDLL" DllEntry="CopySettingsFile"/>
+        <CustomAction Id="CleanupSettings" Impersonate="no" Execute="deferred" Return="check" BinaryKey="CaDLL" DllEntry="RemoveSettingsAndDB"/>
+
+        <InstallExecuteSequence>
+            <Custom Action="SetMsiPath" Before="CostInitialize">Not Installed</Custom>
+            <Custom Action="SetVarsCopySettingsFile" Before="CopySettingsFile">NOT Installed</Custom>
+            <Custom Action="CopySettingsFile" After="InstallFiles">NOT Installed</Custom>
+            <Custom Action="CleanupSettings" Before="RemoveFiles">
+                REMOVE="ALL" AND REMOVEDB="True"
+            </Custom>
+        </InstallExecuteSequence>
+        
+        <?include ARP.wxi ?>
+        <UIRef Id="UI" />
+        <DirectoryRef Id="INSTALLFOLDER" />
+    </Product>
+</Wix>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+    <?define Manufacturer = "Onevinn" ?>
+    <?define ManufacturerShortName = "Onevinn" ?>
+    <?define ProductName = "DeploymentScheduler" ?>
+    <?define ProductShortName = "DeploymentScheduler" ?>
+    <?define ProductDescription="DeploymentScheduler $(var.MSIProductVersion)" ?>
+    <?define ProductComments="DeploymentScheduler $(var.MSIProductVersion)"?>
+    <?define Version = "$(var.MSIProductVersion)" ?>
+</Include>

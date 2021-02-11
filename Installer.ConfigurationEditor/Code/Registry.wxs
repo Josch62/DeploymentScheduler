@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+        <?include Config.wxi ?>
+        <ComponentGroup Id="RegComponents" Directory="TARGETDIR">
+            <Component Id="RegVersion" Guid="8D63DB10-479D-4505-8EA1-5C7B8CA1905B">
+                <RegistryKey Root="HKLM" Key="SOFTWARE\$(var.Manufacturer)\$(var.ProductName)" ForceCreateOnInstall="yes">
+                    <RegistryValue Type="string" Name="Version" Value="[ProductVersion]" KeyPath="yes" />
+                </RegistryKey>
+            </Component>
+        </ComponentGroup>
+	</Fragment>
+</Wix>

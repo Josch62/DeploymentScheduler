@@ -1,0 +1,3 @@
+ALTER TABLE Schedules
+ADD IsAutoSchedule bit NOT NULL DEFAULT 0
+GO

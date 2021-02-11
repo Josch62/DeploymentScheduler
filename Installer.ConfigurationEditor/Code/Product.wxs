@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?include Config.wxi ?>
+    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="$(var.Version)" Manufacturer="$(var.Manufacturer)" UpgradeCode="3FAF9CAB-0C56-455B-8E23-88351E42F401">
+        <Package InstallerVersion="405" Compressed="yes" InstallScope="perMachine" Platform="x64" Manufacturer="$(var.Manufacturer)" />
+        <MediaTemplate EmbedCab="yes" />
+        <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
+        <PropertyRef Id='WIXNETFX4RELEASEINSTALLED'/>
+        <Condition Message='This setup requires the .NET Framework 4.7.2 (or greater) to be installed.'>
+            <![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#461808")]]>
+        </Condition>
+
+        <Property Id="ADMINROOT">
+            <RegistrySearch Id="AdminRoot"
+                            Root="HKLM"
+                            Key="SOFTWARE\Microsoft\ConfigMgr10\Setup"
+                            Name="UI Installation Directory"
+                            Type="raw" />
+        </Property>
+
+        <Condition Message="This application requires the MS Endpoint Configuration Manager console, please install and try again.">
+            <![CDATA[Installed OR ADMINROOT]]>
+        </Condition>
+
+        <?include ARP.wxi ?>
+        <UIRef Id="UI" />
+        <DirectoryRef Id="INSTALLFOLDER" />
+    </Product>
+</Wix>

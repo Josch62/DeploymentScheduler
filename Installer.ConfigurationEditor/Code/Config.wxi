@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+    <?define Manufacturer = "Onevinn" ?>
+    <?define ManufacturerShortName = "Onevinn" ?>
+    <?define ProductName = "ConfigurationEditor" ?>
+    <?define ProductShortName = "ConfigurationEditor" ?>
+    <?define ProductDescription="ConfigurationEditor $(var.MSIProductVersion)" ?>
+    <?define ProductComments="ConfigurationEditor $(var.MSIProductVersion)"?>
+    <?define Version = "$(var.MSIProductVersion)" ?>
+</Include>

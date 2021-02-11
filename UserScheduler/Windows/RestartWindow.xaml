@@ -1,0 +1,49 @@
+<Window x:Name="RestartWnd" x:Class="UserScheduler.Windows.RestartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UserScheduler"
+        mc:Ignorable="d"
+        Topmost="True" Height="175" Width="400" FontFamily="Microsoft Sans Serif" FontSize="14" Background="WhiteSmoke" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" SizeToContent="Height" Loaded="RestartWnd_Loaded" Closing="RestartWnd_Closing">
+    <Window.Resources>
+        <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
+            <Setter Property="Background" Value="LightYellow" />
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="MainGrid" SizeChanged="MainGrid_SizeChanged">
+        <Grid.LayoutTransform>
+            <ScaleTransform x:Name="ApplicationScaleTransform"
+                            CenterX="0"
+                            CenterY="0"
+                            ScaleX="{Binding ElementName=RestartWnd, Path=ScaleValue}"
+                            ScaleY="{Binding ElementName=RestartWnd, Path=ScaleValue}" />
+        </Grid.LayoutTransform>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="50"/>
+
+        </Grid.RowDefinitions>
+        <Grid x:Name="BannerGrid" Grid.Column="1" Grid.Row="0" Background="#0275D9">
+            <Image x:Name="Orglogo" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="Uniform" Margin="8,4,6,4" MaxWidth="200" MaxHeight="30"/>
+            <TextBlock x:Name="OrgName" Text="Onevinn AB" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" FontSize="14" Foreground="White"/>
+        </Grid>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1" Margin="15,20,15,0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="RestartText"  Text="Restarting computer in:" VerticalAlignment="Top" HorizontalAlignment="Left"  FontSize="14" Foreground="Black"/>
+                <TextBlock x:Name="CountDownText" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,20,0" FontSize="14" Foreground="Black"/>
+            </StackPanel>
+            <TextBlock x:Name="InfoText" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,5,0,5" TextWrapping="Wrap" FontSize="12" Foreground="Black"/>
+            <ProgressBar x:Name="Progress" Grid.Column="1" Grid.Row="1" Margin="0,5,0,0" Height="10"/>
+        </StackPanel>
+        
+        <Button x:Name="BtRestartNow" Content="Restart now" Grid.Column="1" Grid.Row="2" Margin="0,0,15,5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="90" Height="24" Click="BtRestartNow_Click"/>
+        <Button x:Name="BtMinimize" Content="Minimize" Grid.Column="1" Grid.Row="2" Margin="0,0,115,5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="90" Height="24" Click="BtMinimize_Click"/>
+    </Grid>
+</Window>

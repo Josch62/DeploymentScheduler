@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+    <?define ServiceSourceDir=$(var.DeploymentScheduler.TargetDir)?>
+	<Fragment>
+        <ComponentGroup Id="ServiceGroup" Directory="INSTALLFOLDER">
+            <Component Id="DeploymentScheduler.exe" Guid="A7E0104C-14CA-4028-AC13-138BAE069E54" Win64="yes">
+                <File Id="DeploymentScheduler.exe" Source="$(var.ServiceSourceDir)\DeploymentScheduler.exe" KeyPath="yes" />
+                <ServiceInstall Id="siDeploymentScheduler" Name="DeploymentScheduler" DisplayName="DeploymentScheduler" Description="DeploymentScheduler" ErrorControl="normal" Start="auto" Type="ownProcess">
+                    <ServiceConfig DelayedAutoStart="yes" OnInstall="yes" OnReinstall ="yes" />
+                </ServiceInstall>
+                <ServiceControl Id="scDeploymentScheduler" Name="DeploymentScheduler" Start="install" Stop="both" Remove="both" Wait="yes" />
+            </Component>
+            <Component Id="DeploymentScheduler.exe.config" Guid="FDC12B1D-2776-409F-9AD3-BE8F265884B2" Win64="yes">
+                <File Id="DeploymentScheduler.exe.config" Source="$(var.ServiceSourceDir)DeploymentScheduler.exe.config" />
+            </Component>
+        </ComponentGroup>
+	</Fragment>
+</Wix>

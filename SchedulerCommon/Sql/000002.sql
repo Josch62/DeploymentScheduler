@@ -1,0 +1,4 @@
+INSERT INTO SupData (Type) VALUES ('STD')
+GO
+INSERT INTO SupData (Type) VALUES ('365')
+GO

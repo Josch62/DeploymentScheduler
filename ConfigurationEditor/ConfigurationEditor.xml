@@ -1,0 +1,19 @@
+﻿<RootNodeDescription NamespaceGuid="F2B3AE08-532B-4966-8E56-5C0BE57A7EF8" Id="ConfigurationEditor" DisplayName="ConfigurationEditor" Description="ViewNodeDescription">
+  <ResourceAssembly>
+    <Assembly>ConfigurationEditor.dll</Assembly>
+    <Type>ConfigurationEditor.Resource.Resources</Type>
+  </ResourceAssembly>
+  <ImagesDescription>
+    <ResourceAssembly>
+      <Assembly>ConfigurationEditor.dll</Assembly>
+      <Type>ConfigurationEditor.Resource.Resources</Type>
+    </ResourceAssembly>
+    <ImageResourceName>product</ImageResourceName>
+  </ImagesDescription>
+  <ViewAssemblyDescriptions>
+    <ViewAssemblyDescription>
+      <Assembly>ConfigurationEditor.dll</Assembly>
+      <Type>ConfigurationEditor.ViewDescription</Type>
+    </ViewAssemblyDescription>
+  </ViewAssemblyDescriptions>
+</RootNodeDescription>

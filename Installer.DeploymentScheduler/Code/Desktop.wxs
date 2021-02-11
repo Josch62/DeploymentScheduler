@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?define UISourceDir=$(var.UserScheduler.TargetDir)?>
+    <Fragment>
+        <!-- TODO: Put your code here. -->
+        <ComponentGroup Id="UIComponents" Directory="INSTALLFOLDER">
+            <Component Id="UserScheduler.exe" Guid="18887671-D714-4B01-B7A1-F13BFF8D5214" Win64="yes">
+                <File Id="UserScheduler.exe" Name="UserScheduler.exe" Source="$(var.UISourceDir)UserScheduler.exe" KeyPath="yes">
+                    <Shortcut Id="scUserScheduler" Name="Deployment scheduler" Directory="ApplicationProgramsFolder" Advertise="yes" Icon="Product.ico">
+                        <ShortcutProperty Key="System.AppUserModel.ID" Value="Onevinn.UserScheduler"/>
+                        <ShortcutProperty Key="System.AppUserModel.ToastActivatorCLSID" Value="{54DC7717-59C3-4ABB-8FD7-34A9FC00D77F}"/>
+                    </Shortcut>
+                </File>
+                <RemoveFolder Id="RemoveDesktopFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
+            </Component>
+            <Component Id="Newtonsoft.Json.dll" Guid="0132075C-F9C5-4F39-AEFC-E832969C576D" Win64="yes">
+                <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="$(var.UISourceDir)Newtonsoft.Json.dll" />
+            </Component>
+
+            <Component Id="Microsoft.Toolkit.Uwp.Notifications.dll" Guid="401EAF68-14E0-4427-9B9F-8BBF1A4E89B6" Win64="yes">
+                <File Id="Microsoft.Toolkit.Uwp.Notifications.dll" Name="Microsoft.Toolkit.Uwp.Notifications.dll" Source="$(var.UISourceDir)Microsoft.Toolkit.Uwp.Notifications.dll" />
+            </Component>
+            <Component Id="QueryString.NETCore.dll" Guid="983B6BAC-FDF0-46F9-A39B-47BFF7D07681" Win64="yes">
+                <File Id="QueryString.NETCore.dll" Name="QueryString.NETCore.dll" Source="$(var.UISourceDir)QueryString.NETCore.dll" />
+            </Component>
+            <!--
+            <Component Id="System.Xml.ReaderWriter.dll" Guid="5931574D-D08C-48C0-8D98-31A8B126AAFF" Win64="yes">
+                <File Id="System.Xml.ReaderWriter.dll" Name="System.Xml.ReaderWriter.dll" Source="$(var.UISourceDir)System.Xml.ReaderWriter.dll" />
+            </Component>
+            -->
+            <Component Id="FontAwesome.WPF.dll" Guid="C55860C4-B21C-4EE4-AFBF-AB0DE4B25E98" Win64="yes">
+                <File Id="FontAwesome.WPF.dll" Name="FontAwesome.WPF.dll" Source="$(var.UISourceDir)FontAwesome.WPF.dll" />
+            </Component>
+            <Component Id="OneControls.dll" Guid="920A3A7C-B0A3-4014-8153-721D64C2DA25" Win64="yes">
+                <File Id="OneControls.dll" Name="OneControls.dll" Source="$(var.UISourceDir)OneControls.dll" />
+            </Component>
+            <Component Id="WPFToolkit.dll" Guid="3A8D605A-1875-487D-8850-280BFDF43102" Win64="yes">
+                <File Id="WPFToolkit.dll" Name="WPFToolkit.dll" Source="$(var.UISourceDir)WPFToolkit.dll" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>

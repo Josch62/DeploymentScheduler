@@ -437,7 +437,7 @@ namespace DeploymentScheduler
             {
                 Globals.Log.Information("Checking Service cycle status.");
 
-                var reqApps = CcmUtils.RequiredApps.Where(x => !x.InstallState.Equals("Installed") && x.EvaluationState == 3).ToList();
+                var reqApps = CcmUtils.RequiredApps.Where(x => !x.InstallState.Equals("Installed") && x.EvaluationState == 3 && !x.IsIpuApplication).ToList();
                 var pendingUpdates = CcmUtils.Updates.ToList();
 
                 if (reqApps.Count() == 0 && pendingUpdates.Count() == 0 && !(CcmUtils.IsUpdatesEnforcing() || CcmUtils.IsAppsEnforcing()) && !RebootChecker.RebootRequired(new RestartChecks() { PendingFileOperations = true }).Any)

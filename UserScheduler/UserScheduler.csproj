@@ -28,9 +28,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>
-    </CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\Onevinn_recommended.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -53,8 +52,7 @@
       <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SchedulerCommon\bin\Release\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net46\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Toolkit.Uwp.Notifications, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Toolkit.Uwp.Notifications.2.0.0\lib\dotnet\Microsoft.Toolkit.Uwp.Notifications.dll</HintPath>
@@ -62,18 +60,8 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="OneControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\OneControls\bin\Release\OneControls.dll</HintPath>
-    </Reference>
     <Reference Include="QueryString.NETCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\QueryString.NET.1.0.0\lib\dotnet\QueryString.NETCore.dll</HintPath>
-    </Reference>
-    <Reference Include="SchedulerCommon">
-      <HintPath>..\SchedulerCommon\bin\Release\SchedulerCommon.dll</HintPath>
-    </Reference>
-    <Reference Include="SchedulerSettings">
-      <HintPath>..\SchedulerSettings\bin\Release\SchedulerSettings.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -242,6 +230,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AdditionalFiles Include="stylecop.json" />
+    <None Include="_EventRegisterUsersGuide.docx" />
+    <None Include="_EventSourceUsersGuide.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -279,6 +269,20 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OneControls\OneControls.csproj">
+      <Project>{5d2632a9-c2ca-47a7-9dac-124c2b0720ad}</Project>
+      <Name>OneControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SchedulerCommon\SchedulerCommon.csproj">
+      <Project>{26256f38-5a47-4c03-ad53-6b0813ce74fd}</Project>
+      <Name>SchedulerCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SchedulerSettings\SchedulerSettings.csproj">
+      <Project>{6567d895-51b8-40cd-b0d1-2b3bccdbe3c6}</Project>
+      <Name>SchedulerSettings</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <WindowsKitsRoot>$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots', 'KitsRoot10', null, RegistryView.Registry32, RegistryView.Default))</WindowsKitsRoot>
@@ -292,5 +296,12 @@
   </Target>
   <Target Name="AfterBuild" Condition="'$(SignAssembly)' == 'true'">
     <CallTarget Targets="SignFiles" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.28\build\Microsoft.Diagnostics.Tracing.EventRegister.targets" Condition="Exists('..\packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.28\build\Microsoft.Diagnostics.Tracing.EventRegister.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.28\build\Microsoft.Diagnostics.Tracing.EventRegister.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.28\build\Microsoft.Diagnostics.Tracing.EventRegister.targets'))" />
   </Target>
 </Project>
